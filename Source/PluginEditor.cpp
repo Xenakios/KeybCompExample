@@ -12,7 +12,7 @@
 //==============================================================================
 KeyboardComponentExampleAudioProcessorEditor::KeyboardComponentExampleAudioProcessorEditor (KeyboardComponentExampleAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-    mKeyComponent(p.mKeyState,juce::MidiKeyboardComponent::horizontalKeyboard)
+    mKeyComponent(p.getKeyboardState(),juce::MidiKeyboardComponent::horizontalKeyboard)
 {
     addAndMakeVisible(mKeyComponent);
     setSize (400, 300);

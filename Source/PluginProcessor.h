@@ -52,9 +52,9 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-    juce::MidiKeyboardState mKeyState;
+    juce::MidiKeyboardState& getKeyboardState() { return mKeyState; }
 private:
-    
+    juce::MidiKeyboardState mKeyState;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KeyboardComponentExampleAudioProcessor)
 };
