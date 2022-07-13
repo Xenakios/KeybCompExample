@@ -137,8 +137,11 @@ void KeyboardComponentExampleAudioProcessor::processBlock (juce::AudioBuffer<flo
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    
+    // note that in order to be able to play the synth with the GUI keyboard,
+    // this call needs to be done first!
     mKeyState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
+    // then, you can do your
+    // mSynth.renderNextBlock stuff
 }
 
 //==============================================================================
