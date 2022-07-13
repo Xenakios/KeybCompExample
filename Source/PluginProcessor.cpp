@@ -26,6 +26,7 @@ KeyboardComponentExampleAudioProcessor::KeyboardComponentExampleAudioProcessor()
         mSynth.addVoice(new juce::SamplerVoice);
     juce::AudioFormatManager man;
     man.registerBasicFormats();
+    // obviously this will fail on someone else's system, so ignore
     std::unique_ptr<juce::AudioFormatReader> reader(man.createReaderFor(juce::File("/Users/x/AudioProjects/sourcesamples/count.wav")));
     juce::BigInteger notes;
     notes.setRange(0, 127, true);
