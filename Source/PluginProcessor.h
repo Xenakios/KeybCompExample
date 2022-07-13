@@ -55,6 +55,7 @@ public:
     juce::MidiKeyboardState& getKeyboardState() { return mKeyState; }
 private:
     juce::MidiKeyboardState mKeyState;
+    juce::Synthesiser mSynth;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KeyboardComponentExampleAudioProcessor)
 };

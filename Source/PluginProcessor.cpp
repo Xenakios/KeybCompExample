@@ -22,6 +22,14 @@ KeyboardComponentExampleAudioProcessor::KeyboardComponentExampleAudioProcessor()
                        )
 #endif
 {
+    for (int i=0;i<8;++i)
+        mSynth.addVoice(new juce::SamplerVoice);
+    juce::AudioFormatManager man;
+    man.registerBasicFormats();
+    std::unique_ptr<juce::AudioFormatReader> reader(man.createReaderFor(juce::File("/Users/x/AudioProjects/sourcesamples/count.wav")));
+    juce::BigInteger notes;
+    notes.setRange(0, 127, true);
+    mSynth.addSound(new juce::SamplerSound("a",*reader,notes,60,0.1,0.1,1.0));
 }
 
 KeyboardComponentExampleAudioProcessor::~KeyboardComponentExampleAudioProcessor()
@@ -93,7 +101,7 @@ void KeyboardComponentExampleAudioProcessor::changeProgramName (int index, const
 //==============================================================================
 void KeyboardComponentExampleAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    
+    mSynth.setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void KeyboardComponentExampleAudioProcessor::releaseResources()
@@ -142,6 +150,7 @@ void KeyboardComponentExampleAudioProcessor::processBlock (juce::AudioBuffer<flo
     mKeyState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
     // then, you can do your
     // mSynth.renderNextBlock stuff
+    mSynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 
 //==============================================================================
